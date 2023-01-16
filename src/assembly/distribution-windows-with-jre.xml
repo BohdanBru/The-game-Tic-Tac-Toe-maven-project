@@ -52,7 +52,7 @@
             <filtered>true</filtered>
         </fileSet>
         <fileSet>
-            <directory>.tmp/jer11windows</directory>
+            <directory>.tmp/jer-windows</directory>
             <outputDirectory>jre</outputDirectory>
 
         </fileSet>

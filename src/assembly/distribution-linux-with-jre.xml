@@ -53,7 +53,7 @@
             <filtered>true</filtered>
         </fileSet>
         <fileSet>
-            <directory>.tmp/jer11Linx</directory>
+            <directory>.tmp/jer-linx</directory>
             <outputDirectory>jre</outputDirectory>
             <includes>
                 <include>bin/java</include>
@@ -62,7 +62,7 @@
             <fileMode>755</fileMode>
         </fileSet>
         <fileSet>
-            <directory>.tmp/jer11Linx</directory>
+            <directory>.tmp/jer-linx</directory>
             <outputDirectory>jre</outputDirectory>
             <excludes>
                 <exclude>bin/java</exclude>
