@@ -3,6 +3,8 @@
 # author Bohdan Brukhovets
 # emaul: mattewgreenman@gmail.com
 # linkdin: https://www.linkedin.com/in/bohdan-brukhovets/
+
+cd "$(dirname "$0")" || exit
 java -jar ${project.build.finalName}.jar
 echo "Please, press ENTER to continue . . . "
 read -r test
