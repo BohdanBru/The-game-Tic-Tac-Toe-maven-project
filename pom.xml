@@ -123,6 +123,9 @@
                     <descriptors>
                         <descriptor>src/assembly/distribution-windows.xml</descriptor>
                         <descriptor>src/assembly/distribution-unix.xml</descriptor>
+                        <descriptor>src/assembly/distribution-windows-with-jre.xml</descriptor>
+                        <descriptor>src/assembly/distribution-MacOs-with-jre.xml</descriptor>
+                        <descriptor>src/assembly/distribution-linux-with-jre.xml</descriptor>
                     </descriptors>
                 </configuration>
                 <executions>
@@ -210,66 +213,6 @@
                                         </transformer>
                                     </transformers>
                                 </configuration>
-                            </execution>
-                        </executions>
-                    </plugin>
-                </plugins>
-            </build>
-        </profile>
-        <profile>
-            <id>windows</id>
-            <activation>
-                <os>
-                    <family>windows</family>
-                </os>
-            </activation>
-            <build>
-                <plugins>
-                    <plugin>
-                        <artifactId>maven-assembly-plugin</artifactId>
-                        <version>${maven-assembly-plugin.version}</version>
-                        <configuration>
-                            <descriptors>
-                                <descriptor>src/assembly/distribution-windows.xml</descriptor>
-                            </descriptors>
-                        </configuration>
-                        <executions>
-                            <execution>
-                                <!--  <id>make-assembly</id>  this is used for inheritance merges -->
-                                <phase>package</phase> <!-- bind to the packaging phase -->
-                                <goals>
-                                    <goal>single</goal>
-                                </goals>
-                            </execution>
-                        </executions>
-                    </plugin>
-                </plugins>
-            </build>
-        </profile>
-        <profile>
-            <id>unix</id>
-            <activation>
-                <os>
-                    <family>unix</family>
-                </os>
-            </activation>
-            <build>
-                <plugins>
-                    <plugin>
-                        <artifactId>maven-assembly-plugin</artifactId>
-                        <version>${maven-assembly-plugin.version}</version>
-                        <configuration>
-                            <descriptors>
-                                <descriptor>src/assembly/distribution-unix.xml</descriptor>
-                            </descriptors>
-                        </configuration>
-                        <executions>
-                            <execution>
-                                <!--  <id>make-assembly</id>  this is used for inheritance merges -->
-                                <phase>package</phase> <!-- bind to the packaging phase -->
-                                <goals>
-                                    <goal>single</goal>
-                                </goals>
                             </execution>
                         </executions>
                     </plugin>
