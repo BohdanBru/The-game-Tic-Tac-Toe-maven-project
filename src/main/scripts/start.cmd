@@ -4,5 +4,6 @@
 @rem linkdin: https://www.linkedin.com/in/bohdan-brukhovets/
 @ echo off
 java -jar ${project.build.finalName}.jar
+pause
 
 @rem C:\Users\User\IdeaProjects\tic-tac-toe-maven\out\tic-tac-toe.jar

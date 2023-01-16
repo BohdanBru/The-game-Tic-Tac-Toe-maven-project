@@ -4,3 +4,5 @@
 # emaul: mattewgreenman@gmail.com
 # linkdin: https://www.linkedin.com/in/bohdan-brukhovets/
 java -jar ${project.build.finalName}.jar
+echo "Please, press ENTER to continue . . . "
+read -r test
