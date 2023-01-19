@@ -53,7 +53,7 @@
             <filtered>true</filtered>
         </fileSet>
         <fileSet>
-            <directory>.tmp/jer-mac</directory>
+            <directory>.tmp/jre-macos</directory>
             <outputDirectory>jre</outputDirectory>
             <includes>
                 <include>bin/java</include>
