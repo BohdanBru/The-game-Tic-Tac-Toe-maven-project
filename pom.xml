@@ -38,6 +38,9 @@
 
         <maven.compiler.source>17</maven.compiler.source>
         <maven.compiler.target>17</maven.compiler.target>
+
+        <!-- Extra tools -->
+        <proguard.version>7.3.1</proguard.version>
         <!-- Maven core plugin-->
         <maven-jar-plugin.artifactId>maven-jar-plugin</maven-jar-plugin.artifactId>
         <maven-clean-plugin.version>3.2.0</maven-clean-plugin.version>
@@ -53,13 +56,14 @@
         <commons-lang3.version>3.12.0</commons-lang3.version>
         <logback-classic.version>1.2.5</logback-classic.version>
         <maven-shade-plugin.version>3.4.1</maven-shade-plugin.version>
-        <maven-dependency-plugin.version>3.2.0</maven-dependency-plugin.version>
+        <maven-dependency-plugin.version>3.5.0</maven-dependency-plugin.version>
         <maven-dependency-plugin.skip>false</maven-dependency-plugin.skip>
         <maven-dependency-plugin.outputDirectory>out</maven-dependency-plugin.outputDirectory>
 
         <!-- Maven aditional plugin -->
         <maven-assembly-plugin.version>3.4.2</maven-assembly-plugin.version>
         <maven-antrun-plugin.version>3.1.0</maven-antrun-plugin.version>
+        <proguard-maven-plugin.version>2.6.0</proguard-maven-plugin.version>
     </properties>
     <build>
         <!--<finalName>tic-tac-toe</finalName> -->
@@ -114,12 +118,51 @@
                 </plugin>
             </plugins>
         </pluginManagement>
-
-
         <plugins>
             <plugin>
+                <groupId>com.github.wvengen</groupId>
+                <artifactId>proguard-maven-plugin</artifactId>
+                <version>${proguard-maven-plugin.version}</version>
+                <executions>
+                    <execution>
+                        <phase>package</phase>
+                        <goals>
+                            <goal>proguard</goal>
+                        </goals>
+                    </execution>
+                </executions>
+                <configuration>
+                    <proguarVersion>${proguard.version}</proguarVersion>
+                    <obfuscate>true</obfuscate>
+                    <injar>${project.build.finalName}.jar</injar>
+                    <outjar>${project.build.finalName}-release.jar</outjar>
+
+                    <proguardInclude>${basedir}/proguard-ruls.conf</proguardInclude>
+                    <libs>
+                        <lib>${java.home}/jmods/java.base.jmod</lib>
+                    </libs>
+                </configuration>
+                <dependencies>
+
+                    <dependency>
+                        <groupId>com.guardsquare</groupId>
+                        <artifactId>proguard-base</artifactId>
+                        <version>${proguard.version}</version>
+                        <scope>runtime</scope>
+                    </dependency>
+
+                    <dependency>
+                        <groupId>com.guardsquare</groupId>
+                        <artifactId>proguard-core</artifactId>
+                        <version>9.0.7</version>
+                        <scope>runtime</scope>
+                    </dependency>
+                </dependencies>
+            </plugin>
+            <!-- -->
+            <plugin>
                 <artifactId>maven-dependency-plugin</artifactId>
-                <version>3.4.0</version>
+                <version>${maven-dependency-plugin.version}</version>
                 <executions>
                     <execution>
                         <id>copy-dependencies</id>
