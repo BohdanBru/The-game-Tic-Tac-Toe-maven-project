@@ -17,10 +17,7 @@ package root.logic;
 
 import root.model.Cell;
 import root.model.GameTable;
-import root.model.Sign;
-
-import static root.model.Sign.O;
-import static root.model.Sign.X;
+import root.model.Player;
 
 /**
  * @author Bohdan Brukhovets
@@ -29,35 +26,27 @@ import static root.model.Sign.X;
 public class Verifier {
     int count = 0;
 
-    public boolean isUserWin(GameTable gameTable) {
-        return varifi(gameTable, X);
 
-    }
-
-    public boolean isComputerWin(GameTable gameTable) {
-        return varifi(gameTable, O);
-    }
-
-    public boolean varifi(GameTable gameTable, Sign sign) {
+    public boolean isWin(GameTable gameTable, Player player) {
         count++;
         if (count >= 5) {
-            if (gameTable.getSign(new Cell(0, 0)) == sign
-                    && gameTable.getSign(new Cell(1, 1)) == sign
-                    && gameTable.getSign(new Cell(2, 2)) == sign
-                    || gameTable.getSign(new Cell(2, 0)) == sign
-                    && gameTable.getSign(new Cell(1, 1)) == sign
-                    && gameTable.getSign(new Cell(0, 2)) == sign
+            if (gameTable.getSign(new Cell(0, 0)) == player.getSign()
+                    && gameTable.getSign(new Cell(1, 1)) == player.getSign()
+                    && gameTable.getSign(new Cell(2, 2)) == player.getSign()
+                    || gameTable.getSign(new Cell(2, 0)) == player.getSign()
+                    && gameTable.getSign(new Cell(1, 1)) == player.getSign()
+                    && gameTable.getSign(new Cell(0, 2)) == player.getSign()
             ) {
                 return true;
             }
             for (int i = 0; i < 3; i++) {
 
-                if (gameTable.getSign(new Cell(i, 0)) == sign
-                        && gameTable.getSign(new Cell(i, 1)) == sign
-                        && gameTable.getSign(new Cell(i, 2)) == sign
-                        || gameTable.getSign(new Cell(0, i)) == sign
-                        && gameTable.getSign(new Cell(1, i)) == sign
-                        && gameTable.getSign(new Cell(2, i)) == sign) {
+                if (gameTable.getSign(new Cell(i, 0)) == player.getSign()
+                        && gameTable.getSign(new Cell(i, 1)) == player.getSign()
+                        && gameTable.getSign(new Cell(i, 2)) == player.getSign()
+                        || gameTable.getSign(new Cell(0, i)) == player.getSign()
+                        && gameTable.getSign(new Cell(1, i)) == player.getSign()
+                        && gameTable.getSign(new Cell(2, i)) == player.getSign()) {
                     return true;
                 }
 

@@ -16,8 +16,10 @@
 package root.logic;
 
 import root.model.GameTable;
+import root.model.Player;
 
-import java.util.Random;
+import static root.model.Sign.O;
+import static root.model.Sign.X;
 
 /**
  * @author Bohdan Brukhovets
@@ -46,36 +48,21 @@ public class Game {
         showGame.printTableRuls();
         final GameTable gameTable = new GameTable();
 
-        if (new Random().nextBoolean()) {
+        /*if (new Random().nextBoolean()) {
             computer.step(gameTable);
             showGame.printTable(gameTable);
-            if (verefier.isComputerWin(gameTable)) {
-                System.out.println("COMPUTER WIN");
-            }
-            if (drawVerifier.isDraw(gameTable)) {
-                System.out.println("SORRY DRAW");
-            }
 
-        }
-        final Move[] moves = {user, computer};
+
+        }*/
+        final Player[] players = {new Player(X, user), new Player(O, computer)};
         while (true) {
-            for (final Move move : moves) {
-
-
-                move.step(gameTable);
+            for (final Player player : players) {
+                player.makeStep(gameTable);
                 showGame.printTable(gameTable);
-                if (move instanceof User) {
-                    if (verefier.isUserWin(gameTable)) {
-                        System.out.println("YOU WIN");
-                        printGameOver();
-                        return;
-                    }
-                } else {
-                    if (verefier.isComputerWin(gameTable)) {
-                        System.out.println("COMPUTER WIN");
-                        printGameOver();
-                        return;
-                    }
+                if (verefier.isWin(gameTable, player)) {
+                    System.out.println(player + " WIN");
+                    printGameOver();
+                    return;
                 }
                 if (drawVerifier.isDraw(gameTable)) {
                     System.out.println("SORRY DRAW");
@@ -85,11 +72,14 @@ public class Game {
             }
 
         }
-
     }
+
 
     private void printGameOver() {
         System.out.println("GAME OVER");
     }
+
 }
+
+
 

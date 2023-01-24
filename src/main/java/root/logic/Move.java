@@ -18,13 +18,14 @@
 package root.logic;
 
 import root.model.GameTable;
+import root.model.Sign;
 
 /**
  * @author Bohdan Brukhovets
  * @link https://www.linkedin.com/in/bohdan-brukhovets/
  */
 public interface Move {
-    void step(GameTable gameTable);
+    void step(GameTable gameTable, Sign sign);
 
 
 }

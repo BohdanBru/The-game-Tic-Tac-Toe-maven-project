@@ -1,5 +1,6 @@
 /*
- * Copyright 2022. Bohdan Brukhovets
+ * Copyright 2023 Bohdan Brukhovets
+ *
  *    Licensed under the Apache License, Version 2.0 (the "License");
  *    you may not use this file except in compliance with the License.
  *    You may obtain a copy of the License at
@@ -11,31 +12,37 @@
  *    WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  *    See the License for the specific language governing permissions and
  *    limitations under the License.
+ *
  */
 
-package root.logic;
+package root.model;
 
-import root.model.Cell;
-import root.model.GameTable;
-import root.model.Sign;
-
-import java.util.Random;
+import root.logic.Move;
 
 /**
  * @author Bohdan Brukhovets
  * @link https://www.linkedin.com/in/bohdan-brukhovets/
  */
-public class Computer implements Move {
+public final class Player {
+    private final Sign sign;
+    private final Move move;
+
+    public Player(Sign sign, Move move) {
+        this.sign = sign;
+        this.move = move;
+    }
+
+    public Sign getSign() {
+        return sign;
+    }
+
+    public void makeStep(GameTable gameTable) {
+        move.step(gameTable, sign);
+    }
+
+
     @Override
-    public void step(GameTable gameTable, final Sign sign) {
-        while (true) {
-            int row = new Random().nextInt(3);
-            int col = new Random().nextInt(3);
-            Cell cell = new Cell(row, col);
-            if (gameTable.isEmpty(cell)) {
-                gameTable.setSign(new Cell(row, col), sign);
-                break;
-            }
-        }
+    public String toString() {
+        return "'" + sign + "'";
     }
 }

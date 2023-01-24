@@ -17,10 +17,9 @@ package root.logic;
 
 import root.model.Cell;
 import root.model.GameTable;
+import root.model.Sign;
 
 import java.util.Scanner;
-
-import static root.model.Sign.X;
 
 /**
  * @author Bohdan Brukhovets
@@ -34,7 +33,7 @@ public class User implements Move {
     }
 
     @Override
-    public void step(GameTable gameTable) {
+    public void step(GameTable gameTable, final Sign sign) {
         System.out.println("Please choose your possion:");
         Scanner scan = new Scanner(System.in);
 
@@ -44,7 +43,7 @@ public class User implements Move {
             if (userChar <= '9' && '0' < userChar) {
                 Cell userCell = cellNumberConverter.toCell(userChar);
                 if (gameTable.isEmpty(userCell)) {
-                    gameTable.setSign(userCell, X);
+                    gameTable.setSign(userCell, sign);
                     break;
                 }
 
