@@ -23,7 +23,7 @@ import root.logic.keypad.DesktopNumericKeypadCellNumberConverter;
  * @link https://www.linkedin.com/in/bohdan-brukhovets/
  */
 public class Launcher {
-    static CellNumberConverter cellNumberConverter = new DesktopNumericKeypadCellNumberConverter();
+    public static CellNumberConverter cellNumberConverter = new DesktopNumericKeypadCellNumberConverter();
 
     public static void main(String[] args) {
         final Game game = new Game(new ShowGame(cellNumberConverter), new Computer(), new User(cellNumberConverter), new Verifier(), new DrawVerifier());

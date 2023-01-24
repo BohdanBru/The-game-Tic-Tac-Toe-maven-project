@@ -26,13 +26,14 @@ import static root.model.Sign.X;
  * @author Bohdan Brukhovets
  * @link https://www.linkedin.com/in/bohdan-brukhovets/
  */
-public class User {
+public class User implements Move {
     CellNumberConverter cellNumberConverter;
 
     public User(CellNumberConverter cellNumberConverter) {
         this.cellNumberConverter = cellNumberConverter;
     }
 
+    @Override
     public void step(GameTable gameTable) {
         System.out.println("Please choose your possion:");
         Scanner scan = new Scanner(System.in);
