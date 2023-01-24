@@ -20,6 +20,8 @@ import root.model.GameTable;
 
 import java.util.Scanner;
 
+import static root.model.Sign.X;
+
 /**
  * @author Bohdan Brukhovets
  * @link https://www.linkedin.com/in/bohdan-brukhovets/
@@ -41,7 +43,7 @@ public class User {
             if (userChar <= '9' && '0' < userChar) {
                 Cell userCell = cellNumberConverter.toCell(userChar);
                 if (gameTable.isEmpty(userCell)) {
-                    gameTable.setSign(userCell, 'X');
+                    gameTable.setSign(userCell, X);
                     break;
                 }
 

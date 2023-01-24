@@ -6,7 +6,7 @@
 
     <groupId>org.example</groupId>
     <artifactId>tic-tac-toe-maven</artifactId>
-    <version>1.0-SNAPSHOT</version>
+    <version>2.0.SNAPSHOT</version>
     <name>Tic Tac Toe</name>
     <description>The game Tic-Tac-Toe - simple game using console mode</description>
     <developers>
