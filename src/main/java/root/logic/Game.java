@@ -59,7 +59,6 @@ public class Game {
         }
         final Move[] moves = {user, computer};
         while (true) {
-            boolean gameOver = false;
             for (final Move move : moves) {
 
 
@@ -68,32 +67,29 @@ public class Game {
                 if (move instanceof User) {
                     if (verefier.isUserWin(gameTable)) {
                         System.out.println("YOU WIN");
-                        gameOver = true;
-                        break;
+                        printGameOver();
+                        return;
                     }
                 } else {
                     if (verefier.isComputerWin(gameTable)) {
                         System.out.println("COMPUTER WIN");
-                        gameOver = true;
-                        break;
+                        printGameOver();
+                        return;
                     }
                 }
                 if (drawVerifier.isDraw(gameTable)) {
                     System.out.println("SORRY DRAW");
-                    gameOver = true;
-                    break;
+                    printGameOver();
+                    return;
                 }
             }
 
-
-            if (gameOver) {
-                break;
-            }
-
-
-            System.out.println("GAME OVER");
         }
+
+    }
+
+    private void printGameOver() {
         System.out.println("GAME OVER");
     }
-    }
+}
 
