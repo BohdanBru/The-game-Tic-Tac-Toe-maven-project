@@ -18,13 +18,9 @@
 package root.logic;
 
 import root.logic.keypad.DesktopNumericKeypadCellNumberConverter;
-import root.model.PlayWithWhom;
 import root.model.Player;
 import root.model.PlayerType;
 
-import java.util.Objects;
-
-import static root.model.PlayWithWhom.*;
 import static root.model.PlayerType.COMPUTER;
 import static root.model.PlayerType.USER;
 import static root.model.Sign.O;
@@ -35,57 +31,67 @@ import static root.model.Sign.X;
  * @link https://www.linkedin.com/in/bohdan-brukhovets/
  */
 public class GameFactory {
-    private final PlayerType player1Type = USER;
+    private final PlayerType player1Type;
 
-    private final PlayerType player2Type = COMPUTER;
-    PlayWithWhom playWithWhom;
+    private final PlayerType player2Type;
+
 
     public GameFactory(final String[] args) {
-
-        String[] array = new String[2];
-        int count = 0;
-        for (String str : args) {
-            array[count++] = str;
+        PlayerType player1Type = null;
+        PlayerType player2Type = null;
+        for (final String arg : args) {
+            if (USER.name().equalsIgnoreCase(arg) || COMPUTER.name().equalsIgnoreCase(arg)) {
+                if (player1Type == null) {
+                    player1Type = PlayerType.valueOf(arg.toUpperCase());
+                } else if (player2Type == null) {
+                    player2Type = PlayerType.valueOf(arg.toUpperCase());
+                } else {
+                    System.err.println("Unsuported command line argument: '" + arg + "'");
+                }
+            } else {
+                System.err.println("Unsuported command line argument: '" + arg + "'");
+            }
         }
-        if (Objects.equals(array[0], "USER") && Objects.equals(array[1], "USER")) {
-            playWithWhom = PlayerWithPlayer;
-        } else if (Objects.equals(array[0], "USER") && Objects.equals(array[1], "COMPUTER")) {
-            playWithWhom = PlayerWithComputer;
-        } else if (Objects.equals(array[0], "COMPUTER") && Objects.equals(array[1], "COMPUTER")) {
-            playWithWhom = ComputerWithComputer;
-
-        } else playWithWhom = PlayerWithComputer;/*{
-            System.out.println("Hapened some erro");
-        System.exit(1);}*/
+        if (player1Type == null) {
+            this.player1Type = USER;
+            this.player2Type = COMPUTER;
+        } else if (player2Type == null) {
+            this.player1Type = USER;
+            this.player2Type = player1Type;
+        } else {
+            this.player1Type = player1Type;
+            this.player2Type = player2Type;
+        }
 
     }
 
 
     public Game create() {
         final CellNumberConverter cellNumberConverter = new DesktopNumericKeypadCellNumberConverter();
-        if (playWithWhom == PlayerWithPlayer) {
-            return new Game(new ShowGame(cellNumberConverter),
-                    new Player(O, new User(cellNumberConverter)),
-                    new Player(X, new User(cellNumberConverter)),
-                    new Verifier(),
-                    new DrawVerifier());
-        } else if (playWithWhom == PlayerWithComputer) {
-            return new Game(new ShowGame(cellNumberConverter),
-                    new Player(O, new Computer()),
-                    new Player(X, new User(cellNumberConverter)),
-                    new Verifier(),
-                    new DrawVerifier());
+        final Player player1;
+        final Player player2;
+        if (player1Type == USER) {
+            player1 = new Player(X, new User(cellNumberConverter));
         } else {
-            return new Game(new ShowGame(cellNumberConverter),
-                    new Player(O, new Computer()),
-                    new Player(X, new Computer()),
-                    new Verifier(),
-                    new DrawVerifier());
+            player1 = new Player(X, new Computer());
         }
+
+        if (player1Type == USER) {
+            player2 = new Player(O, new User(cellNumberConverter));
+        } else {
+            player2 = new Player(O, new Computer());
+        }
+
+        return new Game(new ShowGame(cellNumberConverter),
+                player1,
+                player2,
+                new Verifier(),
+                new DrawVerifier());
+    }
 
 
     }
 
-}
+
 
 
