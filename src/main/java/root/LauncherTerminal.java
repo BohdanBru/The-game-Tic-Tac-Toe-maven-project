@@ -17,6 +17,10 @@ package root;
 
 import root.logic.*;
 import root.logic.keypad.TerminalNumericKeypadCellNumberConverter;
+import root.model.Player;
+
+import static root.model.Sign.O;
+import static root.model.Sign.X;
 
 /**
  * @author Bohdan Brukhovets
@@ -26,7 +30,11 @@ public class LauncherTerminal {
     static CellNumberConverter cellNumberConverter = new TerminalNumericKeypadCellNumberConverter();
 
     public static void main(String[] args) {
-        final Game game = new Game(new ShowGame(cellNumberConverter), new Computer(), new User(cellNumberConverter), new Verifier(), new DrawVerifier());
+        final Game game = new Game(new ShowGame(cellNumberConverter),
+                new Player(O, new Computer()),
+                new Player(X, new User(cellNumberConverter)),
+                new Verifier(),
+                new DrawVerifier());
         game.play();
 
     }

@@ -18,8 +18,7 @@ package root.logic;
 import root.model.GameTable;
 import root.model.Player;
 
-import static root.model.Sign.O;
-import static root.model.Sign.X;
+import java.util.Random;
 
 /**
  * @author Bohdan Brukhovets
@@ -27,58 +26,55 @@ import static root.model.Sign.X;
  */
 public class Game {
     private final ShowGame showGame;
-    private final Computer computer;
-    private final User user;
+    private final Player player1;
+    private final Player player2;
     private final Verifier verefier;
     private final DrawVerifier drawVerifier;
 
-    public Game(ShowGame showGame,
-                Computer computer,
-                User user,
-                Verifier verefier,
-                DrawVerifier drawVerifier) {
+    public Game(ShowGame showGame, Player player1, Player player2, Verifier verefier, DrawVerifier drawVerifier) {
         this.showGame = showGame;
-        this.computer = computer;
-        this.user = user;
+        this.player1 = player1;
+        this.player2 = player2;
         this.verefier = verefier;
         this.drawVerifier = drawVerifier;
     }
+
 
     public void play() {
         showGame.printTableRuls();
         final GameTable gameTable = new GameTable();
 
-        /*if (new Random().nextBoolean()) {
-            computer.step(gameTable);
+        if (new Random().nextBoolean()) {
+            player2.makeStep(gameTable);
             showGame.printTable(gameTable);
 
 
-        }*/
-        final Player[] players = {new Player(X, user), new Player(O, computer)};
-        while (true) {
-            for (final Player player : players) {
-                player.makeStep(gameTable);
-                showGame.printTable(gameTable);
-                if (verefier.isWin(gameTable, player)) {
-                    System.out.println(player + " WIN");
-                    printGameOver();
-                    return;
+            final Player[] players = {player1, player2};
+            while (true) {
+                for (final Player player : players) {
+                    player.makeStep(gameTable);
+                    showGame.printTable(gameTable);
+                    if (verefier.isWin(gameTable, player)) {
+                        System.out.println(player + " WIN");
+                        printGameOver();
+                        return;
+                    }
+                    if (drawVerifier.isDraw(gameTable)) {
+                        System.out.println("SORRY DRAW");
+                        printGameOver();
+                        return;
+                    }
                 }
-                if (drawVerifier.isDraw(gameTable)) {
-                    System.out.println("SORRY DRAW");
-                    printGameOver();
-                    return;
-                }
+
             }
-
         }
-    }
 
+
+    }
 
     private void printGameOver() {
         System.out.println("GAME OVER");
     }
-
 }
 
 
