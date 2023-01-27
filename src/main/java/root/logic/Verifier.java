@@ -28,8 +28,8 @@ public class Verifier {
 
 
     public boolean isWin(GameTable gameTable, Player player) {
-        count++;
-        if (count >= 5) {
+        ++count;
+        if (count >= 4) {
             if (gameTable.getSign(new Cell(0, 0)) == player.getSign()
                     && gameTable.getSign(new Cell(1, 1)) == player.getSign()
                     && gameTable.getSign(new Cell(2, 2)) == player.getSign()

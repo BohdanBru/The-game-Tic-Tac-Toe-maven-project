@@ -15,10 +15,11 @@
   ~
   -->
 <project name="Build JRE for tic-tac-toe game" default="build-jre" basedir=".">
+
     <!-- ******************************* SCRIPT CONFIGS ******************************* -->
     <!-- JPMS modules -->
     <property name="java.modules"
-              value="java.base"/>
+              value="java.base,java.desktop"/>
 
     <!-- Target directories -->
     <property name="target-tmp-dir"
@@ -32,11 +33,11 @@
 
     <!-- JDK download links -->
     <property name="jdk-windows-download-link"
-              value="https://download.java.net/java/GA/jdk17.0.2/dfd4a8d0985749f896bed50d7138ee7f/8/GPL/openjdk-17.0.2_windows-x64_bin.zip"/>
+              value="https://download.java.net/java/GA/jdk11/9/GPL/openjdk-11.0.2_windows-x64_bin.zip"/>
     <property name="jdk-macos-download-link"
-              value="https://download.java.net/java/GA/jdk17.0.1/2a2082e5a09d4267845be086888add4f/12/GPL/openjdk-17.0.1_macos-x64_bin.tar.gz"/>
+              value="https://download.java.net/java/GA/jdk11/9/GPL/openjdk-11.0.2_osx-x64_bin.tar.gz"/>
     <property name="jdk-linux-download-link"
-              value="https://download.java.net/java/GA/jdk17.0.1/2a2082e5a09d4267845be086888add4f/12/GPL/openjdk-17.0.1_linux-x64_bin.tar.gz"/>
+              value="https://download.java.net/java/GA/jdk11/9/GPL/openjdk-11.0.2_linux-x64_bin.tar.gz"/>
 
     <property environment="env"/>
 

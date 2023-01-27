@@ -47,7 +47,7 @@ public class Game {
         if (new Random().nextBoolean()) {
             player2.makeStep(gameTable);
             showGame.printTable(gameTable);
-
+        }
 
             final Player[] players = {player1, player2};
             while (true) {
@@ -70,7 +70,6 @@ public class Game {
         }
 
 
-    }
 
     private void printGameOver() {
         System.out.println("GAME OVER");
