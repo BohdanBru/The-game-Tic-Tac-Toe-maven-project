@@ -15,7 +15,7 @@
  *
  */
 
-package root;
+package root.logic;
 
 import root.model.PlayerType;
 

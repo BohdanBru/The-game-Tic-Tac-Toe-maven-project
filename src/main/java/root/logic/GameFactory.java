@@ -17,7 +17,6 @@
 
 package root.logic;
 
-import root.CommandLineArgumentParser;
 import root.logic.keypad.DesktopNumericKeypadCellNumberConverter;
 import root.model.Player;
 import root.model.PlayerType;
@@ -61,7 +60,7 @@ public class GameFactory {
             player2 = new Player(O, new Computer());
         }
 
-        return new Game(new ShowGame(cellNumberConverter),
+        return new Game(new ShowGameImpl(cellNumberConverter),
                 player1,
                 player2,
                 new Verifier(),

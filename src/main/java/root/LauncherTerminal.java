@@ -30,7 +30,7 @@ public class LauncherTerminal {
     static CellNumberConverter cellNumberConverter = new TerminalNumericKeypadCellNumberConverter();
 
     public static void main(String[] args) {
-        final Game game = new Game(new ShowGame(cellNumberConverter),
+        final Game game = new Game(new ShowGameImpl(cellNumberConverter),
                 new Player(O, new Computer()),
                 new Player(X, new User(cellNumberConverter)),
                 new Verifier(),

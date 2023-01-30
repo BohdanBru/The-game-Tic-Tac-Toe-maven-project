@@ -25,13 +25,13 @@ import java.util.Random;
  * @link https://www.linkedin.com/in/bohdan-brukhovets/
  */
 public class Game {
-    private final ShowGame showGame;
+    private final ShowGameImpl showGame;
     private final Player player1;
     private final Player player2;
     private final Verifier verefier;
     private final DrawVerifier drawVerifier;
 
-    public Game(ShowGame showGame, Player player1, Player player2, Verifier verefier, DrawVerifier drawVerifier) {
+    public Game(ShowGameImpl showGame, Player player1, Player player2, Verifier verefier, DrawVerifier drawVerifier) {
         this.showGame = showGame;
         this.player1 = player1;
         this.player2 = player2;

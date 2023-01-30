@@ -17,18 +17,13 @@
 
 package root.logic;
 
-import root.model.GameTable;
+import root.model.Cell;
 
 /**
  * @author Bohdan Brukhovets
  * @link https://www.linkedin.com/in/bohdan-brukhovets/
  */
-public interface ShowGame {
-    void printInfoMassage(String massage);
+public interface UserInputReader {
 
-    void printErrorMassage(String massage);
-
-    void printTableRules();
-
-    void printTable(GameTable gameTable);
+    Cell getUserInput();
 }
