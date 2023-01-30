@@ -18,6 +18,7 @@
 package root.logic.console;
 
 import root.logic.CellNumberConverter;
+import root.logic.ShowGame;
 import root.model.Cell;
 
 import java.util.Scanner;
@@ -26,14 +27,15 @@ import java.util.Scanner;
  * @author Bohdan Brukhovets
  * @link https://www.linkedin.com/in/bohdan-brukhovets/
  */
-public class UserInputReader implements root.logic.UserInputReader {
+public class ConsoleUserInputReader implements root.logic.UserInputReader {
     private final CellNumberConverter cellNumberConverter;
     private final ShowGame showGame;
 
-    public UserInputReader(CellNumberConverter cellNumberConverter, ShowGame showGame) {
+    public ConsoleUserInputReader(CellNumberConverter cellNumberConverter, ShowGame showGame) {
         this.cellNumberConverter = cellNumberConverter;
         this.showGame = showGame;
     }
+
 
     @Override
     public Cell getUserInput() {

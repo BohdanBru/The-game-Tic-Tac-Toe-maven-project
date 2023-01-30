@@ -15,12 +15,10 @@
 
 package root;
 
-import root.logic.*;
+import root.logic.CellNumberConverter;
+import root.logic.Game;
+import root.logic.GameFactory;
 import root.logic.keypad.TerminalNumericKeypadCellNumberConverter;
-import root.model.Player;
-
-import static root.model.Sign.O;
-import static root.model.Sign.X;
 
 /**
  * @author Bohdan Brukhovets
@@ -30,11 +28,8 @@ public class LauncherTerminal {
     static CellNumberConverter cellNumberConverter = new TerminalNumericKeypadCellNumberConverter();
 
     public static void main(String[] args) {
-        final Game game = new Game(new ShowGameImpl(cellNumberConverter),
-                new Player(O, new Computer()),
-                new Player(X, new User(cellNumberConverter)),
-                new Verifier(),
-                new DrawVerifier());
+        final GameFactory gameFactory = new GameFactory(args);
+        final Game game = gameFactory.create();
         game.play();
 
     }

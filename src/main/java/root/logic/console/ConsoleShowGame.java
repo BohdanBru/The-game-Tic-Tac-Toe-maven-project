@@ -25,10 +25,10 @@ import root.model.GameTable;
  * @author Bohdan Brukhovets
  * @link https://www.linkedin.com/in/bohdan-brukhovets/
  */
-public class ShowGame implements root.logic.ShowGame {
+public class ConsoleShowGame implements root.logic.ShowGame {
     private final CellNumberConverter cellNumberConverter;
 
-    public ShowGame(CellNumberConverter cellNumberConverter) {
+    public ConsoleShowGame(CellNumberConverter cellNumberConverter) {
         this.cellNumberConverter = cellNumberConverter;
     }
 

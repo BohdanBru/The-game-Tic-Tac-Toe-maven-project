@@ -19,37 +19,32 @@ import root.model.Cell;
 import root.model.GameTable;
 import root.model.Sign;
 
-import java.util.Scanner;
-
 /**
  * @author Bohdan Brukhovets
  * @link https://www.linkedin.com/in/bohdan-brukhovets/
  */
 public class User implements Move {
-    CellNumberConverter cellNumberConverter;
+    private final UserInputReader userInputReader;
+    private final ShowGame showGame;
 
-    public User(CellNumberConverter cellNumberConverter) {
-        this.cellNumberConverter = cellNumberConverter;
+    public User(UserInputReader userInputReader, ShowGame showGame) {
+        this.userInputReader = userInputReader;
+        this.showGame = showGame;
     }
 
     @Override
-    public void step(GameTable gameTable, final Sign sign) {
-        System.out.println("Please choose your possion:");
-        Scanner scan = new Scanner(System.in);
+    public void step(final GameTable gameTable, final Sign sign) {
+        showGame.printInfoMassage("Please choose your possion:");
+
 
         while (true) {
-            String userStep = scan.nextLine();
-            char userChar = userStep.charAt(0);
-            if (userChar <= '9' && '0' < userChar) {
-                Cell userCell = cellNumberConverter.toCell(userChar);
-                if (gameTable.isEmpty(userCell)) {
-                    gameTable.setSign(userCell, sign);
-                    break;
-                }
-
-
+            Cell userCell = userInputReader.getUserInput();
+            if (gameTable.isEmpty(userCell)) {
+                gameTable.setSign(userCell, sign);
+                return;
+            } else {
+                showGame.printErrorMassage("You choosed possion has wrong number. Please try again:");
             }
-            System.out.println("You choosed possion is wrong number. Please try again:");
 
 
         }

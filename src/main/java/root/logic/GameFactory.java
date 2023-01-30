@@ -17,6 +17,8 @@
 
 package root.logic;
 
+import root.logic.console.ConsoleShowGame;
+import root.logic.console.ConsoleUserInputReader;
 import root.logic.keypad.DesktopNumericKeypadCellNumberConverter;
 import root.model.Player;
 import root.model.PlayerType;
@@ -45,22 +47,25 @@ public class GameFactory {
 
 
     public Game create() {
+
         final CellNumberConverter cellNumberConverter = new DesktopNumericKeypadCellNumberConverter();
+        final ShowGame showGame = new ConsoleShowGame(cellNumberConverter);
+        final UserInputReader userInputReader = new ConsoleUserInputReader(cellNumberConverter, showGame);
         final Player player1;
         final Player player2;
         if (player1Type == USER) {
-            player1 = new Player(X, new User(cellNumberConverter));
+            player1 = new Player(X, new User(userInputReader, showGame));
         } else {
             player1 = new Player(X, new Computer());
         }
 
         if (player1Type == USER) {
-            player2 = new Player(O, new User(cellNumberConverter));
+            player2 = new Player(O, new User(userInputReader, showGame));
         } else {
             player2 = new Player(O, new Computer());
         }
 
-        return new Game(new ShowGameImpl(cellNumberConverter),
+        return new Game(showGame,
                 player1,
                 player2,
                 new Verifier(),

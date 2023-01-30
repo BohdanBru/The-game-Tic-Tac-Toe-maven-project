@@ -25,13 +25,13 @@ import java.util.Random;
  * @link https://www.linkedin.com/in/bohdan-brukhovets/
  */
 public class Game {
-    private final ShowGameImpl showGame;
+    private final ShowGame showGame;
     private final Player player1;
     private final Player player2;
     private final Verifier verefier;
     private final DrawVerifier drawVerifier;
 
-    public Game(ShowGameImpl showGame, Player player1, Player player2, Verifier verefier, DrawVerifier drawVerifier) {
+    public Game(ShowGame showGame, Player player1, Player player2, Verifier verefier, DrawVerifier drawVerifier) {
         this.showGame = showGame;
         this.player1 = player1;
         this.player2 = player2;
@@ -41,7 +41,7 @@ public class Game {
 
 
     public void play() {
-        showGame.printTableRuls();
+        showGame.printTableRules();
         final GameTable gameTable = new GameTable();
 
         if (new Random().nextBoolean()) {
@@ -55,12 +55,12 @@ public class Game {
                     player.makeStep(gameTable);
                     showGame.printTable(gameTable);
                     if (verefier.isWin(gameTable, player)) {
-                        System.out.println(player + " WIN");
+                        showGame.printInfoMassage(player + " WIN");
                         printGameOver();
                         return;
                     }
                     if (drawVerifier.isDraw(gameTable)) {
-                        System.out.println("SORRY DRAW");
+                        showGame.printInfoMassage("SORRY DRAW");
                         printGameOver();
                         return;
                     }
@@ -72,7 +72,7 @@ public class Game {
 
 
     private void printGameOver() {
-        System.out.println("GAME OVER");
+        showGame.printInfoMassage("GAME OVER");
     }
 }
 
