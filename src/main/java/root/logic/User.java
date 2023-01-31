@@ -34,7 +34,7 @@ public class User implements Move {
 
     @Override
     public void step(final GameTable gameTable, final Sign sign) {
-        showGame.printInfoMassage("Please choose your possion:");
+        showGame.printInfoMessage("Please choose your possion:");
 
 
         while (true) {
@@ -43,7 +43,7 @@ public class User implements Move {
                 gameTable.setSign(userCell, sign);
                 return;
             } else {
-                showGame.printErrorMassage("You choosed possion has wrong number. Please try again:");
+                showGame.printErrorMessage("You choosed possion has wrong number. Please try again:");
             }
 
 

@@ -33,12 +33,12 @@ public class ConsoleShowGame implements root.logic.ShowGame {
     }
 
     @Override
-    public void printInfoMassage(String massage) {
+    public void printInfoMessage(String massage) {
         System.out.println(massage);
     }
 
     @Override
-    public void printErrorMassage(String massage) {
+    public void printErrorMessage(String massage) {
         System.err.println(massage);
     }
 

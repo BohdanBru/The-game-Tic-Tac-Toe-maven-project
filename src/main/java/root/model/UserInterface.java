@@ -15,20 +15,19 @@
  *
  */
 
-package root.logic;
-
-import root.model.GameTable;
+package root.model;
 
 /**
  * @author Bohdan Brukhovets
  * @link https://www.linkedin.com/in/bohdan-brukhovets/
  */
-public interface ShowGame {
-    void printInfoMessage(String massage);
+public enum UserInterface {
+    GUI,
+    CONSOLE;
 
-    void printErrorMessage(String massage);
+    @Override
+    public String toString() {
 
-    void printTableRules();
-
-    void printTable(GameTable gameTable);
+        return name();
+    }
 }

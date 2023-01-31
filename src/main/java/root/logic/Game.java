@@ -55,12 +55,12 @@ public class Game {
                     player.makeStep(gameTable);
                     showGame.printTable(gameTable);
                     if (verefier.isWin(gameTable, player)) {
-                        showGame.printInfoMassage(player + " WIN");
+                        showGame.printInfoMessage(player + " WIN");
                         printGameOver();
                         return;
                     }
                     if (drawVerifier.isDraw(gameTable)) {
-                        showGame.printInfoMassage("SORRY DRAW");
+                        showGame.printInfoMessage("SORRY DRAW");
                         printGameOver();
                         return;
                     }
@@ -72,7 +72,7 @@ public class Game {
 
 
     private void printGameOver() {
-        showGame.printInfoMassage("GAME OVER");
+        showGame.printInfoMessage("GAME OVER");
     }
 }
 

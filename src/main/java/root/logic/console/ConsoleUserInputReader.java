@@ -41,7 +41,7 @@ public class ConsoleUserInputReader implements root.logic.UserInputReader {
     public Cell getUserInput() {
         while (true) {
             //System.out.println("Please type number between 1 and 9 :");
-            showGame.printInfoMassage("Please type number between 1 and 9 :");
+            showGame.printInfoMessage("Please type number between 1 and 9 :");
             final String userInput = new Scanner(System.in).nextLine();
             if (userInput.length() == 1) {
                 final char ch = userInput.charAt(0);
