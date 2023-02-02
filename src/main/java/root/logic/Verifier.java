@@ -15,9 +15,9 @@
 
 package root.logic;
 
-import root.model.Cell;
-import root.model.GameTable;
-import root.model.Player;
+import root.model.game.Cell;
+import root.model.game.GameTable;
+import root.model.game.Player;
 
 /**
  * @author Bohdan Brukhovets

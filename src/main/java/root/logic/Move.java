@@ -17,8 +17,8 @@
 
 package root.logic;
 
-import root.model.GameTable;
-import root.model.Sign;
+import root.model.game.GameTable;
+import root.model.game.Sign;
 
 /**
  * @author Bohdan Brukhovets

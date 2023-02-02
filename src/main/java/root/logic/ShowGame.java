@@ -17,13 +17,16 @@
 
 package root.logic;
 
-import root.model.GameTable;
+import root.model.game.GameTable;
 
 /**
  * @author Bohdan Brukhovets
  * @link https://www.linkedin.com/in/bohdan-brukhovets/
  */
 public interface ShowGame {
+
+    void printInstructions(String message);
+
     void printInfoMessage(String massage);
 
     void printErrorMessage(String massage);

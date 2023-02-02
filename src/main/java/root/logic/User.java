@@ -15,9 +15,9 @@
 
 package root.logic;
 
-import root.model.Cell;
-import root.model.GameTable;
-import root.model.Sign;
+import root.model.game.Cell;
+import root.model.game.GameTable;
+import root.model.game.Sign;
 
 /**
  * @author Bohdan Brukhovets
@@ -34,7 +34,7 @@ public class User implements Move {
 
     @Override
     public void step(final GameTable gameTable, final Sign sign) {
-        showGame.printInfoMessage("Please choose your possion:");
+        showGame.printInstructions("Please choose your possion:");
 
 
         while (true) {

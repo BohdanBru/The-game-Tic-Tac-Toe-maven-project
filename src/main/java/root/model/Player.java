@@ -18,6 +18,8 @@
 package root.model;
 
 import root.logic.Move;
+import root.model.game.GameTable;
+import root.model.game.Sign;
 
 /**
  * @author Bohdan Brukhovets
@@ -27,16 +29,17 @@ public final class Player {
     private final Sign sign;
     private final Move move;
 
-    public Player(Sign sign, Move move) {
+    public Player(root.model.game.Sign sign, Move move) {
         this.sign = sign;
         this.move = move;
     }
 
-    public Sign getSign() {
+    public root.model.game.Sign getSign() {
         return sign;
     }
 
     public void makeStep(GameTable gameTable) {
+
         move.step(gameTable, sign);
     }
 

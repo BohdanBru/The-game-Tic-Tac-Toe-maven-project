@@ -17,9 +17,8 @@
 
 package root.logic.console;
 
-import root.logic.CellNumberConverter;
 import root.logic.ShowGame;
-import root.model.Cell;
+import root.model.game.Cell;
 
 import java.util.Scanner;
 
@@ -41,7 +40,7 @@ public class ConsoleUserInputReader implements root.logic.UserInputReader {
     public Cell getUserInput() {
         while (true) {
             //System.out.println("Please type number between 1 and 9 :");
-            showGame.printInfoMessage("Please type number between 1 and 9 :");
+            showGame.printInstructions("Please type number between 1 and 9 :");
             final String userInput = new Scanner(System.in).nextLine();
             if (userInput.length() == 1) {
                 final char ch = userInput.charAt(0);
@@ -50,7 +49,7 @@ public class ConsoleUserInputReader implements root.logic.UserInputReader {
                 }
             }
 
-            System.out.println("You choosed possion is wrong number. Please try again:");
+            showGame.printErrorMessage("You choosed possion is wrong number. Please try again:");
 
 
         }

@@ -17,7 +17,7 @@
 
 package root.logic;
 
-import root.model.Cell;
+import root.model.game.Cell;
 
 /**
  * @author Bohdan Brukhovets

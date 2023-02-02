@@ -33,13 +33,14 @@ if [ -z ${JAVA_CMD+x} ]; then
   else
 
     #Run tic-tac-toe game:
-    $JAVA_CMD -jar ${project.build.finalName}-release.jar
+    # shellcheck disable=SC2068
+    $JAVA_CMD -jar ${project.build.finalName}-release.jar "$@"
     RETURN_CODE=0
     fi
     #----------------------------------------------------------------------------------
     # Wait for the enter key pressed:
-    echo "Press enter to continue . . ."
-    read -r test
+  #  echo "Press enter to continue . . ."
+  # read -r test
     #----------------------------------------------------------------------------------
     exit $RETURN_CODE
 

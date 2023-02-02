@@ -15,8 +15,8 @@
 
 package root.logic;
 
-import root.model.GameTable;
-import root.model.Player;
+import root.model.game.GameTable;
+import root.model.game.Player;
 
 import java.util.Random;
 
@@ -30,13 +30,15 @@ public class Game {
     private final Player player2;
     private final Verifier verefier;
     private final DrawVerifier drawVerifier;
+    private final GameOverHandler gameOverHandler;
 
-    public Game(ShowGame showGame, Player player1, Player player2, Verifier verefier, DrawVerifier drawVerifier) {
+    public Game(ShowGame showGame, Player player1, Player player2, Verifier verefier, DrawVerifier drawVerifier, GameOverHandler gameOverHandler) {
         this.showGame = showGame;
         this.player1 = player1;
         this.player2 = player2;
         this.verefier = verefier;
         this.drawVerifier = drawVerifier;
+        this.gameOverHandler = gameOverHandler;
     }
 
 
@@ -47,6 +49,7 @@ public class Game {
         if (new Random().nextBoolean()) {
             player2.makeStep(gameTable);
             showGame.printTable(gameTable);
+            DrawVerifier.count++;
         }
 
             final Player[] players = {player1, player2};
@@ -56,12 +59,12 @@ public class Game {
                     showGame.printTable(gameTable);
                     if (verefier.isWin(gameTable, player)) {
                         showGame.printInfoMessage(player + " WIN");
-                        printGameOver();
+                        gameOverHandler.gameOver();
                         return;
                     }
                     if (drawVerifier.isDraw(gameTable)) {
                         showGame.printInfoMessage("SORRY DRAW");
-                        printGameOver();
+                        gameOverHandler.gameOver();
                         return;
                     }
                 }
@@ -70,10 +73,6 @@ public class Game {
         }
 
 
-
-    private void printGameOver() {
-        showGame.printInfoMessage("GAME OVER");
-    }
 }
 
 

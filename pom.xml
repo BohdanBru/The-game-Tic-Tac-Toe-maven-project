@@ -25,55 +25,49 @@
         </license>
     </licenses>
     <scm>
-        <connection>scm:git:git://github.com/devonline-academy/tic-tac-toe.git</connection>
-        <developerConnection>scm:git:ssh://github.com:devonline-academy/tic-tac-toe.git</developerConnection>
-        <url>http://github.com/devonline-academy/tic-tac-toe/tree/master</url>
+        <connection>scm:git:git://github.com/BohdanBru/The-game-Tic-Tac-Toe-maven-project.git</connection>
+        <developerConnection>scm:git:ssh://github.com/BohdanBru/The-game-Tic-Tac-Toe-maven-project.git
+        </developerConnection>
+        <url>https://github.com/BohdanBru/The-game-Tic-Tac-Toe-maven-project/tree/master</url>
     </scm>
 
     <!--<packaging>jar</packaging> -->
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <maven.compiler.source>11</maven.compiler.source>
+        <maven.compiler.target>11</maven.compiler.target>
 
+        <!-- External tool -->
+        <proguard.version>7.1.1</proguard.version>
 
-        <maven.compiler.source>17</maven.compiler.source>
-        <maven.compiler.target>17</maven.compiler.target>
-
-        <!-- Extra tools -->
-        <proguard.version>7.3.1</proguard.version>
-        <!-- Maven core plugin-->
-        <maven-jar-plugin.artifactId>maven-jar-plugin</maven-jar-plugin.artifactId>
-        <maven-clean-plugin.version>3.2.0</maven-clean-plugin.version>
-        <maven-resources-plugin.version>3.3.0</maven-resources-plugin.version>
-        <maven-compiler-plugin.version>3.10.1</maven-compiler-plugin.version>
+        <!-- Maven core plugins -->
+        <maven-clean-plugin.version>3.1.0</maven-clean-plugin.version>
+        <maven-resources-plugin.version>3.2.0</maven-resources-plugin.version>
+        <maven-compiler-plugin.version>3.8.1</maven-compiler-plugin.version>
         <maven-surefire-plugin.version>2.22.2</maven-surefire-plugin.version>
-        <maven-jar-plugin.version>3.3.0</maven-jar-plugin.version>
-        <maven-install-plugin.version>1</maven-install-plugin.version>
-        <maven-deploy-plugin.version>3.0.0</maven-deploy-plugin.version>
-        <maven-site-plugin.version>3.12.1</maven-site-plugin.version>
-        <maven-project-info-reports-plugin.version>3.4.1</maven-project-info-reports-plugin.version>
-        <!--Prodject dependencies-->
-        <commons-lang3.version>3.12.0</commons-lang3.version>
-        <logback-classic.version>1.2.5</logback-classic.version>
-        <maven-shade-plugin.version>3.4.1</maven-shade-plugin.version>
-        <maven-dependency-plugin.version>3.5.0</maven-dependency-plugin.version>
-        <maven-dependency-plugin.skip>false</maven-dependency-plugin.skip>
+        <maven-jar-plugin.version>3.2.0</maven-jar-plugin.version>
+        <maven-install-plugin.version>2.5.2</maven-install-plugin.version>
+        <maven-deploy-plugin.version>2.8.2</maven-deploy-plugin.version>
+        <maven-site-plugin.version>3.9.1</maven-site-plugin.version>
+        <maven-project-info-reports-plugin.version>3.1.2</maven-project-info-reports-plugin.version>
         <maven-dependency-plugin.outputDirectory>out</maven-dependency-plugin.outputDirectory>
 
-        <!-- Maven aditional plugin -->
-        <maven-assembly-plugin.version>3.4.2</maven-assembly-plugin.version>
-        <maven-antrun-plugin.version>3.1.0</maven-antrun-plugin.version>
-        <proguard-maven-plugin.version>2.6.0</proguard-maven-plugin.version>
+        <!-- Maven additional plugins -->
+        <maven-assembly-plugin.version>3.3.0</maven-assembly-plugin.version>
+        <maven-antrun-plugin.version>3.0.0</maven-antrun-plugin.version>
+        <proguard-maven-plugin.version>2.3.1</proguard-maven-plugin.version>
     </properties>
+
     <build>
-        <!--<finalName>tic-tac-toe</finalName> -->
-        <directory>${maven-dependency-plugin.outputDirectory}</directory>
         <pluginManagement>
             <plugins>
+                <!-- clean lifecycle -->
                 <plugin>
                     <artifactId>maven-clean-plugin</artifactId>
                     <version>${maven-clean-plugin.version}</version>
                 </plugin>
+                <!-- default lifecycle -->
                 <plugin>
                     <artifactId>maven-resources-plugin</artifactId>
                     <version>${maven-resources-plugin.version}</version>
@@ -87,27 +81,8 @@
                     <version>${maven-surefire-plugin.version}</version>
                 </plugin>
                 <plugin>
-                    <artifactId>${maven-jar-plugin.artifactId}</artifactId>
-                    <version>${maven-jar-plugin.version}</version>
-                </plugin>
-                <plugin>
-                    <artifactId>maven-install-plugin</artifactId>
-                    <version>3.${maven-install-plugin.version}.0</version>
-                </plugin>
-                <plugin>
-                    <artifactId>maven-deploy-plugin</artifactId>
-                    <version>${maven-deploy-plugin.version}</version>
-                </plugin>
-                <plugin>
-                    <artifactId>maven-site-plugin</artifactId>
-                    <version>${maven-site-plugin.version}</version>
-                </plugin>
-                <plugin>
-                    <artifactId>maven-project-info-reports-plugin</artifactId>
-                    <version>${maven-project-info-reports-plugin.version}</version>
-                </plugin>
-                <plugin>
                     <artifactId>maven-jar-plugin</artifactId>
+                    <version>${maven-jar-plugin.version}</version>
                     <configuration>
                         <archive>
                             <manifest>
@@ -115,6 +90,23 @@
                             </manifest>
                         </archive>
                     </configuration>
+                </plugin>
+                <plugin>
+                    <artifactId>maven-install-plugin</artifactId>
+                    <version>${maven-install-plugin.version}</version>
+                </plugin>
+                <plugin>
+                    <artifactId>maven-deploy-plugin</artifactId>
+                    <version>${maven-deploy-plugin.version}</version>
+                </plugin>
+                <!-- site lifecycle -->
+                <plugin>
+                    <artifactId>maven-site-plugin</artifactId>
+                    <version>${maven-site-plugin.version}</version>
+                </plugin>
+                <plugin>
+                    <artifactId>maven-project-info-reports-plugin</artifactId>
+                    <version>${maven-project-info-reports-plugin.version}</version>
                 </plugin>
             </plugins>
         </pluginManagement>
@@ -132,81 +124,53 @@
                     </execution>
                 </executions>
                 <configuration>
-                    <proguarVersion>${proguard.version}</proguarVersion>
+                    <proguardVersion>${proguard.version}</proguardVersion>
                     <obfuscate>true</obfuscate>
                     <injar>${project.build.finalName}.jar</injar>
                     <outjar>${project.build.finalName}-release.jar</outjar>
-
-                    <proguardInclude>${basedir}/proguard-ruls.conf</proguardInclude>
+                    <proguardInclude>proguard-rules.conf</proguardInclude>
                     <libs>
                         <lib>${java.home}/jmods/java.base.jmod</lib>
+                        <lib>${java.home}/jmods/java.desktop.jmod</lib>
                     </libs>
                 </configuration>
                 <dependencies>
-
                     <dependency>
                         <groupId>com.guardsquare</groupId>
                         <artifactId>proguard-base</artifactId>
                         <version>${proguard.version}</version>
                         <scope>runtime</scope>
                     </dependency>
-
                     <dependency>
                         <groupId>com.guardsquare</groupId>
                         <artifactId>proguard-core</artifactId>
-                        <version>9.0.7</version>
+                        <version>${proguard.version}</version>
                         <scope>runtime</scope>
                     </dependency>
                 </dependencies>
             </plugin>
-            <!-- -->
-            <plugin>
-                <artifactId>maven-dependency-plugin</artifactId>
-                <version>${maven-dependency-plugin.version}</version>
-                <executions>
-                    <execution>
-                        <id>copy-dependencies</id>
-                        <phase>package</phase>
-                        <goals>
-                            <goal>copy-dependencies</goal>
-                        </goals>
-                        <configuration>
-                            <outputDirectory>${maven-dependency-plugin.outputDirectory}\alternateLocation
-                            </outputDirectory>
-                            <stripVersion>true</stripVersion>
-                            <!-- <destFileName>optional-new-name.jar</destFileName> -->
-                        </configuration>
-                    </execution>
-                </executions>
-
-            </plugin>
         </plugins>
-
-
     </build>
     <profiles>
         <profile>
-            <id>with-dependencies</id>
+            <id>without-jre</id>
             <build>
                 <plugins>
                     <plugin>
-
-                        <artifactId>maven-dependency-plugin</artifactId>
-                        <version>${maven-dependency-plugin.version}</version>
-                        <configuration>
-                            <skip>${maven-dependency-plugin.skip}</skip>
-                        </configuration>
+                        <artifactId>maven-assembly-plugin</artifactId>
+                        <version>${maven-assembly-plugin.version}</version>
                         <executions>
                             <execution>
-                                <id>copy-dependencies</id>
+                                <id>without-jre</id>
                                 <phase>package</phase>
                                 <goals>
-                                    <goal>copy-dependencies</goal>
+                                    <goal>single</goal>
                                 </goals>
                                 <configuration>
-                                    <includeScope>system</includeScope>
-                                    <outputDirectory>${maven-dependency-plugin.outputDirectory}/lib</outputDirectory>
-                                    <stripVersion>true</stripVersion>
+                                    <descriptors>
+                                        <descriptor>src/assembly/distribution-windows.xml</descriptor>
+                                        <descriptor>src/assembly/distribution-unix.xml</descriptor>
+                                    </descriptors>
                                 </configuration>
                             </execution>
                         </executions>
@@ -215,35 +179,7 @@
             </build>
         </profile>
         <profile>
-            <id>uber</id>
-            <build>
-                <plugins>
-                    <plugin>
-                        <artifactId>maven-shade-plugin</artifactId>
-                        <version>${maven-shade-plugin.version}</version>
-                        <executions>
-                            <execution>
-                                <id>uber</id>
-                                <phase>package</phase>
-                                <goals>
-                                    <goal>shade</goal>
-                                </goals>
-                                <configuration>
-                                    <transformers>
-                                        <transformer implementation=
-                                                             "org.apache.maven.plugins.shade.resource.ManifestResourceTransformer">
-                                            <mainClass>Launcher</mainClass>
-                                        </transformer>
-                                    </transformers>
-                                </configuration>
-                            </execution>
-                        </executions>
-                    </plugin>
-                </plugins>
-            </build>
-        </profile>
-        <profile>
-            <id>distribution-with-jre</id>
+            <id>with-jre</id>
             <build>
                 <plugins>
                     <plugin>
@@ -254,7 +190,6 @@
                                 <phase>package</phase>
                                 <configuration>
                                     <target>
-
                                         <ant antfile="${project.basedir}/build-jre.xml">
                                             <target name="build-jre"/>
                                         </ant>
@@ -271,8 +206,8 @@
                         <version>${maven-assembly-plugin.version}</version>
                         <executions>
                             <execution>
-                                <id>with-jer</id>  <!-- this is used for inheritance merges -->
-                                <phase>package</phase> <!-- bind to the packaging phase -->
+                                <id>with-jre</id>
+                                <phase>package</phase>
                                 <goals>
                                     <goal>single</goal>
                                 </goals>
@@ -289,47 +224,5 @@
                 </plugins>
             </build>
         </profile>
-        <profile>
-            <id>distribution-with-jar</id>
-            <build>
-                <plugins>
-                    <plugin>
-                        <artifactId>maven-assembly-plugin</artifactId>
-                        <version>${maven-assembly-plugin.version}</version>
-                        <executions>
-                            <execution>
-                                <id>with-jar</id>  <!--  this is used for inheritance merges -->
-                                <phase>package</phase> <!-- bind to the packaging phase -->
-                                <goals>
-                                    <goal>single</goal>
-                                </goals>
-                                <configuration>
-                                    <descriptors>
-                                        <descriptor>src/assembly/distribution-windows.xml</descriptor>
-                                        <descriptor>src/assembly/distribution-unix.xml</descriptor>
-                                    </descriptors>
-                                </configuration>
-                            </execution>
-                        </executions>
-                    </plugin>
-                </plugins>
-            </build>
-        </profile>
     </profiles>
-    <dependencies>
-        <!-- https://mvnrepository.com/artifact/org.apache.commons/commons-lang3 -->
-        <dependency>
-            <groupId>org.apache.commons</groupId>
-            <artifactId>commons-lang3</artifactId>
-            <version>${commons-lang3.version}</version>
-        </dependency>
-
-        <!-- https://mvnrepository.com/artifact/ch.qos.logback/logback-classic -->
-        <dependency>
-            <groupId>ch.qos.logback</groupId>
-            <artifactId>logback-classic</artifactId>
-            <version>${logback-classic.version}</version>
-        </dependency>
-    </dependencies>
-
 </project>

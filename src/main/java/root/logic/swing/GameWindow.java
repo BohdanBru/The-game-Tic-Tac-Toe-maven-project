@@ -17,10 +17,11 @@
 
 package root.logic.swing;
 
+import root.logic.GameOverHandler;
 import root.logic.ShowGame;
 import root.logic.UserInputReader;
-import root.model.Cell;
-import root.model.GameTable;
+import root.model.game.Cell;
+import root.model.game.GameTable;
 
 import javax.swing.*;
 import java.awt.*;
@@ -31,7 +32,7 @@ import java.awt.event.MouseEvent;
  * @author Bohdan Brukhovets
  * @link https://www.linkedin.com/in/bohdan-brukhovets/
  */
-public class GameWindow extends JFrame implements ShowGame, UserInputReader {
+public class GameWindow extends JFrame implements ShowGame, UserInputReader, GameOverHandler {
     private static final int GAME_TABLE_SIZE = 3;
     private static final int FONT_SIZE = 35;
     private static final int CELL_SIZE = 150;
@@ -92,6 +93,11 @@ public class GameWindow extends JFrame implements ShowGame, UserInputReader {
     }
 
     @Override
+    public void printInstructions(String message) {
+        //do nothing
+    }
+
+    @Override
     public void printInfoMessage(final String message) {
         JOptionPane.showMessageDialog(this, message, "Info", JOptionPane.INFORMATION_MESSAGE);
     }
@@ -132,4 +138,8 @@ public class GameWindow extends JFrame implements ShowGame, UserInputReader {
         new GameWindow();
     }
 
+    @Override
+    public void gameOver() {
+        System.exit(0);
+    }
 }

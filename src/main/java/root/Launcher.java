@@ -15,10 +15,9 @@
 
 package root;
 
-import root.logic.CellNumberConverter;
 import root.logic.Game;
-import root.logic.GameFactory;
-import root.logic.keypad.DesktopNumericKeypadCellNumberConverter;
+import root.logic.console.CellNumberConverter;
+import root.logic.console.keypad.DesktopNumericKeypadCellNumberConverter;
 
 /**
  * @author Bohdan Brukhovets

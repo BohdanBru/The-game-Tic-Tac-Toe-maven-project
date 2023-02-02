@@ -17,9 +17,8 @@
 
 package root.logic.console;
 
-import root.logic.CellNumberConverter;
-import root.model.Cell;
-import root.model.GameTable;
+import root.model.game.Cell;
+import root.model.game.GameTable;
 
 /**
  * @author Bohdan Brukhovets
@@ -27,6 +26,11 @@ import root.model.GameTable;
  */
 public class ConsoleShowGame implements root.logic.ShowGame {
     private final CellNumberConverter cellNumberConverter;
+
+    @Override
+    public void printInstructions(String message) {
+        System.out.println(message);
+    }
 
     public ConsoleShowGame(CellNumberConverter cellNumberConverter) {
         this.cellNumberConverter = cellNumberConverter;
