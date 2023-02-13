@@ -43,6 +43,7 @@ public class DesktopNumericKeypadCellNumberConverter implements CellNumberConver
             }
 
         }
+
         throw new IllegalArgumentException(
                 (format("Number parameter must be between 1 to 9. Your carent value is '%s'!", number)));
         //return null;
