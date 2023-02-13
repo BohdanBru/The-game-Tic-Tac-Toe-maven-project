@@ -18,6 +18,8 @@ package root.logic.keypad;
 import root.logic.CellNumberConverter;
 import root.model.Cell;
 
+import static java.lang.String.format;
+
 /**
  * @author Bohdan Brukhovets
  * @link https://www.linkedin.com/in/bohdan-brukhovets/
@@ -31,6 +33,7 @@ public class DesktopNumericKeypadCellNumberConverter implements CellNumberConver
 
     @Override
     public Cell toCell(char number) {
+
         for (int i = 0; i < 3; i++) {
             for (int j = 0; j < 3; j++) {
                 if (mapping[i][j] == number) {
@@ -40,7 +43,9 @@ public class DesktopNumericKeypadCellNumberConverter implements CellNumberConver
             }
 
         }
-        return null;
+        throw new IllegalArgumentException(
+                (format("Number parameter must be between 1 to 9. Your carent value is '%s'!", number)));
+        //return null;
     }
 
     @Override

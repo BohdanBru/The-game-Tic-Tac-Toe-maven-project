@@ -45,11 +45,11 @@ public class ConsoleUserInputReader implements root.logic.UserInputReader {
             if (userInput.length() == 1) {
                 final char ch = userInput.charAt(0);
                 if (ch <= '9' && '0' < ch) {
-                    return cellNumberConverter.toCell(ch);
+                        return cellNumberConverter.toCell(ch);
                 }
             }
 
-            showGame.printErrorMessage("You choosed possion is wrong number. Please try again:");
+            showGame.printErrorMessage("You chose  wrong number. Please try again:");
 
 
         }
