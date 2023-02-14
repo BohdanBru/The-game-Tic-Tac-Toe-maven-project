@@ -27,8 +27,26 @@ import java.util.Random;
  */
 public class Computer implements Move {
     @Override
+
     public void step(GameTable gameTable, final Sign sign) {
-        while (true) {
+        final Cell[] emptyCellArray = new Cell[9];
+        int count = 0;
+        for (int i = 0; i < 3; i++) {
+            for (int j = 0; j < 3; j++) {
+                Cell tempCell = new Cell(i, j);
+                if (gameTable.isEmpty(tempCell)) {
+                    emptyCellArray[count++] = tempCell;
+                }
+
+            }
+
+        }
+        if (count > 0) {
+            final Cell randomCell = emptyCellArray[new Random().nextInt(count)];
+            gameTable.setSign(randomCell, sign);
+        } else throw new IllegalArgumentException("Game table doesn't have any empty cell");
+        /*while (true) {
+
             int row = new Random().nextInt(3);
             int col = new Random().nextInt(3);
             Cell cell = new Cell(row, col);
@@ -36,6 +54,8 @@ public class Computer implements Move {
                 gameTable.setSign(new Cell(row, col), sign);
                 break;
             }
-        }
+        }*/
+
+
     }
 }

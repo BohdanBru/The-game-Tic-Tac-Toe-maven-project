@@ -18,6 +18,8 @@ package root.logic.keypad;
 import root.logic.CellNumberConverter;
 import root.model.Cell;
 
+import static java.lang.String.format;
+
 /**
  * @author Bohdan Brukhovets
  * @link https://www.linkedin.com/in/bohdan-brukhovets/
@@ -31,20 +33,32 @@ public class TerminalNumericKeypadCellNumberConverter implements CellNumberConve
 
     @Override
     public Cell toCell(char number) {
-        for (int i = 0; i < 3; i++) {
-            for (int j = 0; j < 3; j++) {
-                if (mapping[i][j] == number) {
-                    return new Cell(i, j);
+        if (number >= '1' && '9' >= number) {
+            for (int i = 0; i < 3; i++) {
+                for (int j = 0; j < 3; j++) {
+                    if (mapping[i][j] == number) {
+                        return new Cell(i, j);
+                    }
+
                 }
 
             }
 
         }
-        return null;
+        throw new IllegalArgumentException(
+                format("Number parameter must be between 1 to 9. Your current value is '%s'!", number));
+
+
     }
 
     @Override
     public char toNumber(Cell cell) {
-        return mapping[cell.getRow()][cell.getCol()];
+        try {
+            return mapping[cell.getRow()][cell.getCol()];
+        } catch (ArrayIndexOutOfBoundsException ignore) {
+            throw new IllegalArgumentException(
+                    format("Row and col index must be between 0 to 2! current row is and current col  is  '%s'!",
+                            cell.getRow(), cell.getCol()));
+        }
     }
 }
