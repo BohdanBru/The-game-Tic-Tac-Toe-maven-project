@@ -19,15 +19,16 @@ package root.logic.strategy;
 
 import root.model.game.Sign;
 
-public class WinNowComputerMoveStrategy extends AbstractComputerMoveStrategy {
+public class WinOnTheNextStepComputerMoveStrategy extends AbstractComputerMoveStrategy {
 
-
-    public WinNowComputerMoveStrategy() {
-        super(1);
+    public WinOnTheNextStepComputerMoveStrategy() {
+        super(2);
     }
 
     @Override
     protected Sign getFindSing(Sign moveSing) {
         return moveSing;
     }
+
+
 }

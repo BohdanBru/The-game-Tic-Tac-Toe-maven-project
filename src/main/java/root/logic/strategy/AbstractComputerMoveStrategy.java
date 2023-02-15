@@ -24,18 +24,23 @@ import root.model.game.Sign;
 
 public abstract class AbstractComputerMoveStrategy implements ComputerMoveStrategy {
     int count = 1;
+    private final int expectedCountEmptyCell;
+
+    protected AbstractComputerMoveStrategy(int expectedCpuntEmptyCell) {
+        this.expectedCountEmptyCell = expectedCpuntEmptyCell;
+    }
 
     @Override
     public final boolean tryToMakeMove(GameTable gameTable, Sign signMove) {
         final Sign findSing = getFindSing(signMove);
-        if (count++ >= 2) {
-            return tryToMoveByCol(gameTable, findSing, signMove) ||
-                    tryToMoveByRow(gameTable, findSing, signMove) ||
-                    tryToMoveByMainDiagonal(gameTable, findSing, signMove) ||
-                    tryToMoveBySecondaryDiagonal(gameTable, findSing, signMove);
-        }
+        //if (count++ >= 2) {
+        return tryToMoveByCol(gameTable, findSing, signMove) ||
+                tryToMoveByRow(gameTable, findSing, signMove) ||
+                tryToMoveByMainDiagonal(gameTable, findSing, signMove) ||
+                tryToMoveBySecondaryDiagonal(gameTable, findSing, signMove);
+        // }
 
-        return false;
+        //return false;
 
     }
 
@@ -89,7 +94,7 @@ public abstract class AbstractComputerMoveStrategy implements ComputerMoveStrate
                 numberOfSignCell++;
             } else break;
         }
-        if (numberOfSignCell == 2 && emptyCell == 1) {
+        if (tempCell != null && numberOfSignCell == expectedCountEmptyCell && emptyCell == 3 - expectedCountEmptyCell) {
 
             gameTable.setSign(tempCell, signMove);
             return true;
@@ -99,6 +104,7 @@ public abstract class AbstractComputerMoveStrategy implements ComputerMoveStrate
 
 
     }
+
 
     @FunctionalInterface
     private interface Lambda {

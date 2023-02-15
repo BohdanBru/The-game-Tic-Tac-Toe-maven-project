@@ -21,8 +21,14 @@ import root.model.game.Sign;
 
 public class PreventUserWinComputerMoveStrategy extends AbstractComputerMoveStrategy {
 
+    public PreventUserWinComputerMoveStrategy() {
+        super(2);
+    }
+
     @Override
     protected Sign getFindSing(Sign moveSing) {
         return moveSing.oppositeSign();
     }
+
+
 }
