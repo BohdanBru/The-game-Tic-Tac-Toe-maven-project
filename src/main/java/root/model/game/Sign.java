@@ -33,4 +33,13 @@ public enum Sign {
         } else
             return name();
     }
+
+    public Sign oppositeSign() {
+        if (this == X) {
+            return O;
+        } else if (this == O) {
+            return X;
+        } else
+            throw new IllegalArgumentException("Current Cell is EMPTY. Empty Cell does not have opposite sign");
+    }
 }

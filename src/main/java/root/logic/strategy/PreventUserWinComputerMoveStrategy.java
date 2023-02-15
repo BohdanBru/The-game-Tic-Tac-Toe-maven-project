@@ -17,73 +17,12 @@
 
 package root.logic.strategy;
 
-import root.logic.ComputerMoveStrategy;
-import root.model.game.Cell;
-import root.model.game.GameTable;
 import root.model.game.Sign;
 
-public class PreventUserWinComputerMoveStrategy implements ComputerMoveStrategy {
+public class PreventUserWinComputerMoveStrategy extends AbstractComputerMoveStrategy {
+
     @Override
-    public boolean tryToMakeMove(GameTable gameTable, Sign sign) {
-        return tryToMakeMoveRow(gameTable, sign) ||
-                tryToMakeMoveCol(gameTable, sign) ||
-                tryToMakeMoveMainDiagonal(gameTable, sign) ||
-                tryToMakeMoveSecondaryDiagonal(gameTable, sign);
-
-
-    }
-
-    public boolean tryToMakeMoveRow(GameTable gameTable, Sign sign) {
-        for (int i = 0; i < 3; i++) {
-            tryMoveByLambda(gameTable, sign, i, (k, j) -> new Cell(k, j));
-
-        }
-        return false;
-    }
-
-    public boolean tryToMakeMoveCol(GameTable gameTable, Sign sign) {
-        for (int i = 0; i < 3; i++) {
-            tryMoveByLambda(gameTable, sign, i, (k, j) -> new Cell(j, k));
-
-        }
-        return false;
-    }
-
-    public boolean tryToMakeMoveMainDiagonal(GameTable gameTable, Sign sign) {
-        return tryMoveByLambda(gameTable, sign, -1, (k, j) -> new Cell(j, j));
-
-    }
-
-    public boolean tryToMakeMoveSecondaryDiagonal(GameTable gameTable, Sign sign) {
-        return tryMoveByLambda(gameTable, sign, -1, (k, j) -> new Cell(j, 2 - j));
-
-    }
-
-    private boolean tryMoveByLambda(GameTable gameTable, Sign sign, int i, Lambda lambda) {
-        int emptyCell = 0;
-        int countOppositeSine = 0;
-        Cell tempCall = null;
-        for (int j = 0; j < 3; j++) {
-            Cell targetCell = lambda.tryMove(i, j);
-            if (gameTable.isEmpty(targetCell)) {
-                emptyCell++;
-                tempCall = targetCell;
-            } else if (gameTable.getSign(targetCell) != sign) {
-                countOppositeSine++;
-            } else break;
-
-        }
-        if (emptyCell == 1 && countOppositeSine == 2) {
-            gameTable.setSign(tempCall, sign);
-            return true;
-        }
-
-        return false;
-    }
-
-    @FunctionalInterface
-    private interface Lambda {
-        Cell tryMove(int i, int j);
-
+    protected Sign getFindSing(Sign moveSing) {
+        return moveSing.oppositeSign();
     }
 }
