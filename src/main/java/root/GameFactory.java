@@ -24,6 +24,7 @@ import root.logic.console.ConsoleGameOverHandler;
 import root.logic.console.ConsoleShowGame;
 import root.logic.console.ConsoleUserInputReader;
 import root.logic.console.keypad.DesktopNumericKeypadCellNumberConverter;
+import root.logic.strategy.RandomComputerMoveStrategy;
 import root.logic.swing.GameWindow;
 import root.model.config.PlayerType;
 import root.model.config.UserInterface;
@@ -61,6 +62,9 @@ public class GameFactory {
     public Game create() {
 
         /* final CellNumberConverter cellNumberConverter = new DesktopNumericKeypadCellNumberConverter();*/
+        final ComputerMoveStrategy[] strategies = {
+                new RandomComputerMoveStrategy()
+        };
         final ShowGame showGame;
         final UserInputReader userInputReader;
         final GameOverHandler gameOverHandler;
@@ -81,13 +85,13 @@ public class GameFactory {
         if (player1Type == USER) {
             player1 = new Player(X, new User(userInputReader, showGame));
         } else {
-            player1 = new Player(X, new Computer());
+            player1 = new Player(X, new Computer(strategies));
         }
 
         if (player2Type == USER) {
             player2 = new Player(O, new User(userInputReader, showGame));
         } else {
-            player2 = new Player(O, new Computer());
+            player2 = new Player(O, new Computer(strategies));
         }
 
         return new Game(showGame,
