@@ -26,6 +26,7 @@ import root.logic.console.ConsoleUserInputReader;
 import root.logic.console.keypad.DesktopNumericKeypadCellNumberConverter;
 import root.logic.strategy.FirstMoveToTheCenterComputerMoveStrategy;
 import root.logic.strategy.RandomComputerMoveStrategy;
+import root.logic.strategy.WinNowComputerMoveStrategy;
 import root.logic.swing.GameWindow;
 import root.model.config.PlayerType;
 import root.model.config.UserInterface;
@@ -64,6 +65,7 @@ public class GameFactory {
 
         /* final CellNumberConverter cellNumberConverter = new DesktopNumericKeypadCellNumberConverter();*/
         final ComputerMoveStrategy[] strategies = {
+                new WinNowComputerMoveStrategy(),
                 new FirstMoveToTheCenterComputerMoveStrategy(),
                 new RandomComputerMoveStrategy()
         };
