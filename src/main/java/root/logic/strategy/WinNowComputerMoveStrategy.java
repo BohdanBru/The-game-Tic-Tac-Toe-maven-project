@@ -190,48 +190,21 @@ public class WinNowComputerMoveStrategy implements ComputerMoveStrategy {
 
     private boolean tryToMoveByRow(GameTable gameTable, Sign sign) {
         for (int i = 0; i < 3; i++) {
-            int numberOfSignCell = 0;
-            int emptyCell = 0;
-            Cell tempCell = null;
-            for (int j = 0; j < 3; j++) {
-                if (gameTable.isEmpty(new Cell(i, j))) {
-                    tempCell = new Cell(i, j);
-                    emptyCell++;
-                } else if (gameTable.getSign(new Cell(i, j)) == sign) {
-                    numberOfSignCell++;
-                } else break;
-            }
-            if (numberOfSignCell == 2 && emptyCell == 1) {
-
-                gameTable.setSign(tempCell, sign);
+            if (tryToMoveUsingLambda(gameTable, sign, i, (k, j) -> new Cell(k, j))) {
                 return true;
             }
-
         }
         return false;
+
 
 
     }
 
     private boolean tryToMoveByCol(GameTable gameTable, Sign sign) {
         for (int i = 0; i < 3; i++) {
-            int numberOfSignCell = 0;
-            int emptyCell = 0;
-            Cell tempCell = null;
-            for (int j = 0; j < 3; j++) {
-                if (gameTable.isEmpty(new Cell(j, i))) {
-                    tempCell = new Cell(j, i);
-                    emptyCell++;
-                } else if (gameTable.getSign(new Cell(j, i)) == sign) {
-                    numberOfSignCell++;
-                } else break;
-            }
-            if (numberOfSignCell == 2 && emptyCell == 1) {
-
-                gameTable.setSign(tempCell, sign);
+            if (tryToMoveUsingLambda(gameTable, sign, i, (k, j) -> new Cell(j, k))) {
                 return true;
             }
-
         }
         return false;
 
@@ -240,37 +213,26 @@ public class WinNowComputerMoveStrategy implements ComputerMoveStrategy {
 
     private boolean tryToMoveByMainDiagonal(GameTable gameTable, Sign sign) {
 
-        int numberOfSignCell = 0;
-        int emptyCell = 0;
-        Cell tempCell = null;
-        for (int j = 0; j < 3; j++) {
-            if (gameTable.isEmpty(new Cell(j, j))) {
-                tempCell = new Cell(j, j);
-                emptyCell++;
-            } else if (gameTable.getSign(new Cell(j, j)) == sign) {
-                numberOfSignCell++;
-            } else break;
-        }
-        if (numberOfSignCell == 2 && emptyCell == 1) {
-
-            gameTable.setSign(tempCell, sign);
-            return true;
-        }
-        return false;
-
+        return tryToMoveUsingLambda(gameTable, sign, -1, (k, j) -> new Cell(j, j));
 
     }
 
     private boolean tryToMoveBySecondaryDiagonal(GameTable gameTable, Sign sign) {
 
+        return tryToMoveUsingLambda(gameTable, sign, -1, (k, j) -> new Cell(j, 2 - j));
+
+    }
+
+    private boolean tryToMoveUsingLambda(GameTable gameTable, Sign sign, int i, Lambda lambda) {
         int numberOfSignCell = 0;
         int emptyCell = 0;
         Cell tempCell = null;
         for (int j = 0; j < 3; j++) {
-            if (gameTable.isEmpty(new Cell(j, 2 - j))) {
-                tempCell = new Cell(j, 2 - j);
+            Cell targetCell = lambda.tryMove(i, j);
+            if (gameTable.isEmpty(targetCell)) {
+                tempCell = targetCell;
                 emptyCell++;
-            } else if (gameTable.getSign(new Cell(j, 2 - j)) == sign) {
+            } else if (gameTable.getSign(targetCell) == sign) {
                 numberOfSignCell++;
             } else break;
         }
@@ -279,8 +241,14 @@ public class WinNowComputerMoveStrategy implements ComputerMoveStrategy {
             gameTable.setSign(tempCell, sign);
             return true;
         }
+
         return false;
 
 
+    }
+
+    @FunctionalInterface
+    private interface Lambda {
+        Cell tryMove(int k, int j);
     }
 }
