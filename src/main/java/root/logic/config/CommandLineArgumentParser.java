@@ -17,9 +17,11 @@
 
 package root.logic.config;
 
+import root.model.config.LevelOfDifficult;
 import root.model.config.PlayerType;
 import root.model.config.UserInterface;
 
+import static root.model.config.LevelOfDifficult.*;
 import static root.model.config.PlayerType.COMPUTER;
 import static root.model.config.PlayerType.USER;
 import static root.model.config.UserInterface.CONSOLE;
@@ -40,6 +42,7 @@ public class CommandLineArgumentParser {
         PlayerType player1Type = null;
         PlayerType player2Type = null;
         UserInterface userInterface = null;
+        LevelOfDifficult level = THIRD;
         for (final String arg : args) {
             if (USER.name().equalsIgnoreCase(arg) || COMPUTER.name().equalsIgnoreCase(arg)) {
                 if (player1Type == null) {
@@ -55,6 +58,17 @@ public class CommandLineArgumentParser {
                 } else {
                     System.err.println("Unsuported command line argument: '" + arg + "'");
                 }
+            } else if (FIRST.name().equalsIgnoreCase(arg) ||
+                    SECOND.name().equalsIgnoreCase(arg) ||
+                    THIRD.name().equalsIgnoreCase(arg)) {
+                level = LevelOfDifficult.valueOf(arg.toUpperCase());
+
+            } else if ("1".equals(arg)) {
+                level = FIRST;
+            } else if ("2".equals(arg)) {
+                level = SECOND;
+            } else if ("3".equals(arg)) {
+                level = THIRD;
             } else {
                 System.err.println("Unsuported command line argument: '" + arg + "'");
             }
@@ -63,11 +77,11 @@ public class CommandLineArgumentParser {
             userInterface = CONSOLE;
         }
         if (player1Type == null) {
-            return new CommandLineArguments(USER, COMPUTER, userInterface);
+            return new CommandLineArguments(USER, COMPUTER, userInterface, level);
         } else if (player2Type == null) {
-            return new CommandLineArguments(USER, player1Type, userInterface);
+            return new CommandLineArguments(USER, player1Type, userInterface, level);
         } else {
-            return new CommandLineArguments(player1Type, player2Type, userInterface);
+            return new CommandLineArguments(player1Type, player2Type, userInterface, level);
         }
     }
 
@@ -77,12 +91,21 @@ public class CommandLineArgumentParser {
 
         private final PlayerType player2Type;
         private final UserInterface userInterface;
+        private final LevelOfDifficult level;
 
         private CommandLineArguments(PlayerType player1Type,
-                                     PlayerType player2Type, UserInterface userInterface) {
+                                     PlayerType player2Type,
+                                     UserInterface userInterface,
+                                     LevelOfDifficult level) {
             this.player1Type = player1Type;
             this.player2Type = player2Type;
             this.userInterface = userInterface;
+            this.level = level;
+
+        }
+
+        public LevelOfDifficult getLevel() {
+            return level;
         }
 
         public PlayerType getPlayer1Type() {
@@ -96,5 +119,6 @@ public class CommandLineArgumentParser {
         public UserInterface getUserInterface() {
             return userInterface;
         }
+
     }
 }

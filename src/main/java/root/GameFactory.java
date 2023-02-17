@@ -24,8 +24,8 @@ import root.logic.console.ConsoleGameOverHandler;
 import root.logic.console.ConsoleShowGame;
 import root.logic.console.ConsoleUserInputReader;
 import root.logic.console.keypad.DesktopNumericKeypadCellNumberConverter;
-import root.logic.strategy.*;
 import root.logic.swing.GameWindow;
+import root.model.config.LevelOfDifficult;
 import root.model.config.PlayerType;
 import root.model.config.UserInterface;
 import root.model.game.Player;
@@ -45,6 +45,7 @@ public class GameFactory {
     private final PlayerType player2Type;
 
     private final UserInterface userInterface;
+    private final LevelOfDifficult level;
 
 
 
@@ -55,21 +56,14 @@ public class GameFactory {
         player1Type = commandLineArguments.getPlayer1Type();
         player2Type = commandLineArguments.getPlayer2Type();
         userInterface = commandLineArguments.getUserInterface();
-
+        level = commandLineArguments.getLevel();
     }
 
 
     public Game create() {
 
         /* final CellNumberConverter cellNumberConverter = new DesktopNumericKeypadCellNumberConverter();*/
-        final ComputerMoveStrategy[] strategies = {
-                new PreventUserWinComputerMoveStrategy(),
-                new WinNowComputerMoveStrategy(),
 
-                new WinOnTheNextStepComputerMoveStrategy(),
-                new FirstMoveToTheCenterComputerMoveStrategy(),
-                new RandomComputerMoveStrategy()
-        };
         final ShowGame showGame;
         final UserInputReader userInputReader;
         final GameOverHandler gameOverHandler;
@@ -90,13 +84,13 @@ public class GameFactory {
         if (player1Type == USER) {
             player1 = new Player(X, new User(userInputReader, showGame));
         } else {
-            player1 = new Player(X, new Computer(strategies));
+            player1 = new Player(X, new Computer(level.getStrategies()));
         }
 
         if (player2Type == USER) {
             player2 = new Player(O, new User(userInputReader, showGame));
         } else {
-            player2 = new Player(O, new Computer(strategies));
+            player2 = new Player(O, new Computer(level.getStrategies()));
         }
 
         return new Game(showGame,
